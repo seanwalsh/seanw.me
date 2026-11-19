@@ -18,6 +18,8 @@ export async function signIn(_prev: SignInState, form: FormData): Promise<SignIn
 
   const supabase = await createClient();
   const { data, error } = await supabase.auth.signInWithPassword({ email, password });
+  if (error) console.error("[sign-in] Supabase rejected sign-in:", error.status, error.code, error.message);
+  else if (!isAllowedAdmin(data.user?.email)) console.error("[sign-in] Signed in, but not in ADMIN_EMAILS");
   if (error || !isAllowedAdmin(data.user?.email)) {
     if (data?.user) await supabase.auth.signOut();
     return { error: "That email address and password don't match.", email };
