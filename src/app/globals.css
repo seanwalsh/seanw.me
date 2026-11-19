@@ -1,0 +1,135 @@
+@import "tailwindcss";
+
+:root {
+  --bg: #f7f7f5;
+  --card: #ffffff;
+  --fg: #18181b;
+  --muted: #71717a;
+  --border: #e4e4e7;
+  --subtle: #f1f1ef;
+  --accent: #4f46e5;
+  --accent-fg: #ffffff;
+  --danger: #dc2626;
+  --success: #16a34a;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0c0c0e;
+    --card: #151518;
+    --fg: #f4f4f5;
+    --muted: #a1a1aa;
+    --border: #27272a;
+    --subtle: #1c1c20;
+    --accent: #818cf8;
+    --accent-fg: #0c0c0e;
+    --danger: #f87171;
+    --success: #4ade80;
+  }
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-card: var(--card);
+  --color-fg: var(--fg);
+  --color-muted: var(--muted);
+  --color-border: var(--border);
+  --color-subtle: var(--subtle);
+  --color-accent: var(--accent);
+  --color-accent-fg: var(--accent-fg);
+  --color-danger: var(--danger);
+  --color-success: var(--success);
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
+}
+
+body {
+  background: var(--bg);
+  color: var(--fg);
+}
+
+/* Shared form controls */
+@utility input {
+  @apply w-full rounded-lg border border-border bg-card px-3 py-2 text-sm text-fg outline-none transition placeholder:text-muted/70 focus:border-accent focus:ring-2 focus:ring-accent/25;
+}
+@utility label {
+  @apply mb-1.5 block text-sm font-medium;
+}
+@utility hint {
+  @apply mt-1 text-xs text-muted;
+}
+@utility btn {
+  @apply inline-flex items-center justify-center gap-2 rounded-lg px-3.5 py-2 text-sm font-medium transition disabled:cursor-not-allowed disabled:opacity-60;
+}
+@utility btn-primary {
+  @apply btn bg-accent text-accent-fg hover:opacity-90;
+}
+@utility btn-secondary {
+  @apply btn border border-border bg-card hover:bg-subtle;
+}
+@utility btn-ghost {
+  @apply btn text-muted hover:bg-subtle hover:text-fg;
+}
+@utility btn-danger {
+  @apply btn border border-danger/40 text-danger hover:bg-danger/10;
+}
+@utility card {
+  @apply rounded-xl border border-border bg-card;
+}
+
+/* ---- Space scene (home + 404) ---- */
+.space {
+  background: radial-gradient(ellipse at 50% 120%, #1e1b4b 0%, #0b0a1a 45%, #040409 100%);
+}
+.stars,
+.stars::after {
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(1px 1px at 20px 30px, #fff, transparent),
+    radial-gradient(1px 1px at 120px 80px, #ddd, transparent),
+    radial-gradient(1.5px 1.5px at 200px 150px, #fff, transparent),
+    radial-gradient(1px 1px at 280px 40px, #bbb, transparent),
+    radial-gradient(1px 1px at 340px 200px, #fff, transparent),
+    radial-gradient(1.5px 1.5px at 60px 220px, #eee, transparent),
+    radial-gradient(1px 1px at 160px 260px, #fff, transparent);
+  background-size: 380px 300px;
+  animation: twinkle 6s ease-in-out infinite alternate;
+}
+.stars::after {
+  content: "";
+  background-size: 520px 420px;
+  background-position: 90px 60px;
+  animation-delay: -3s;
+}
+@keyframes twinkle {
+  from { opacity: 0.35; }
+  to { opacity: 1; }
+}
+.moon {
+  background: radial-gradient(circle at 35% 35%, #f4f4f5, #a1a1aa 70%, #52525b);
+  box-shadow: 0 0 80px 10px rgba(165, 180, 252, 0.15), inset -18px -14px 30px rgba(0, 0, 0, 0.35);
+}
+.crater {
+  position: absolute;
+  border-radius: 9999px;
+  background: radial-gradient(circle at 60% 60%, #d4d4d8, #71717a);
+  box-shadow: inset 3px 3px 6px rgba(0, 0, 0, 0.35);
+}
+.orbit {
+  animation: orbit 14s linear infinite;
+}
+@keyframes orbit {
+  from { transform: rotate(0deg) translateX(var(--r)) rotate(0deg); }
+  to { transform: rotate(360deg) translateX(var(--r)) rotate(-360deg); }
+}
+.drift {
+  animation: drift 7s ease-in-out infinite;
+}
+@keyframes drift {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .stars, .stars::after, .orbit, .drift { animation: none; }
+}
