@@ -5,10 +5,11 @@ function required(name: string, value: string | undefined): string {
 
 // NEXT_PUBLIC_* must be referenced literally so Next can inline them at build time.
 export const SUPABASE_URL = () => required("NEXT_PUBLIC_SUPABASE_URL", process.env.NEXT_PUBLIC_SUPABASE_URL);
-export const SUPABASE_ANON_KEY = () =>
-  required("NEXT_PUBLIC_SUPABASE_ANON_KEY", process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY);
-export const SUPABASE_SERVICE_ROLE_KEY = () =>
-  required("SUPABASE_SERVICE_ROLE_KEY", process.env.SUPABASE_SERVICE_ROLE_KEY);
+/** sb_publishable_… — safe in the browser; RLS applies. */
+export const SUPABASE_PUBLISHABLE_KEY = () =>
+  required("NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY", process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY);
+/** sb_secret_… — server only; bypasses RLS. Supabase rejects it from browsers. */
+export const SUPABASE_SECRET_KEY = () => required("SUPABASE_SECRET_KEY", process.env.SUPABASE_SECRET_KEY);
 
 export const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL ?? "https://seanw.me").replace(/\/$/, "");
 export const SITE_HOST = new URL(SITE_URL).host;

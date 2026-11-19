@@ -9,7 +9,7 @@ frontend:
       commands:
         # Amplify only exposes console env vars at build time. Write the server-side ones
         # into .env.production so the SSR compute runtime can read them.
-        - env | grep -E '^(NEXT_PUBLIC_|SUPABASE_SERVICE_ROLE_KEY|CRON_SECRET|ADMIN_EMAILS)' >> .env.production
+        - env | grep -E '^(NEXT_PUBLIC_|SUPABASE_SECRET_KEY|CRON_SECRET|ADMIN_EMAILS)' >> .env.production
         - npm run build
   artifacts:
     baseDirectory: .next

@@ -35,7 +35,7 @@ A personal URL shortener: Next.js 15 on AWS Amplify, with Supabase (free tier) f
 3. Go to **Authentication → Sign In / Providers** and turn **off** "Allow new users to sign up".
 4. Go to **Authentication → Users → Add user → Create new user**, enter your email address and a password, and check "Auto Confirm User".
 5. Go to **Authentication → URL Configuration** and set the Site URL to `https://seanw.me`.
-6. Copy the project URL, the anon or publishable key, and the service_role or secret key from **Project Settings → API**.
+6. Go to **Project Settings → API Keys → Publishable and secret API keys**. Copy the publishable key (`sb_publishable_…`) and the secret key (`sb_secret_…`). This app uses the [new API keys](https://supabase.com/docs/guides/getting-started/migrating-to-new-api-keys), not the deprecated `anon`/`service_role` JWTs. Once it's deployed, you can deactivate the legacy keys.
 
 ### 2. Local development
 
